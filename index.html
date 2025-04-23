@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibek Raj Bhatt - Portfolio</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+            transition: background 0.5s ease;
+        }
+
+        /* Glassmorphic Container */
+        .glass-container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            overflow: hidden;
+            padding: 30px;
+            position: relative;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            font-weight: 500;
+        }
+
+        /* Page Content */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Page */
+        .hero {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            background: linear-gradient(45deg, #ffffff, #e0e0e0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .skill {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* About Page */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .about-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .about-section h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #fff;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .about-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #ffffff, rgba(255,255,255,0));
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-item i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            width: 30px;
+            text-align: center;
+        }
+
+        /* Contact Page */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: white;
+            font-size: 1rem;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .submit-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .glass-container {
+                padding: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="glass-container">
+        <div class="nav">
+            <button class="nav-btn active" data-page="home">Home</button>
+            <button class="nav-btn" data-page="about">About Me</button>
+            <button class="nav-btn" data-page="contact">Contact</button>
+        </div>
+
+        <!-- Home Page -->
+        <div class="page active" id="home-page">
+            <div class="hero">
+                <h1>Bibek Raj Bhatt</h1>
+                <p>Computer Science Graduate | Software Enthusiast | Problem Solver</p>
+                <div class="skills">
+                    <div class="skill">HTML/CSS</div>
+                    <div class="skill">JavaScript</div>
+                    <div class="skill">Python</div>
+                    <div class="skill">Java</div>
+                    <div class="skill">Database</div>
+                    <div class="skill">Web Development</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div class="page" id="about-page">
+            <div class="about-content">
+                <div class="about-section">
+                    <h2>About Me</h2>
+                    <p>I am Bibek Raj Bhatt, a recent graduate with a BSc (Hons) in Computer Science and Software Engineering. Passionate about technology and problem-solving, I enjoy creating efficient solutions and learning new technologies.</p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Education</h2>
+                    <div class="info-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div>
+                            <h3>BSc (Hons) in Computer Science & Software Engineering</h3>
+                            <p>Graduated from [Your University Name]</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h2>Personal Information</h2>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+977 9818799329</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>bibekbhatta.info@gmail.com</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Narayanthan, Kathmandu, Nepal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div class="page" id="contact-page">
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" rows="5" placeholder="Enter your message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+
+            <div class="contact-info">
+                <h2>Contact Information</h2>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+977 9818799329</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>bibekbhatta.info@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Narayanthan, Kathmandu, Nepal</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation between pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const pages = document.querySelectorAll('.page');
+
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons and pages
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    // Show corresponding page
+                    const pageId = this.getAttribute('data-page') + '-page';
+                    document.getElementById(pageId).classList.add('active');
+                });
+            });
+
+            // Form submission
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Here you would typically send this data to a server
+                    console.log('Form submitted:', { name, email, message });
+                    
+                    // Show success message
+                    alert('Thank you for your message! I will get back to you soon.');
+                    
+                    // Reset form
+                    contactForm.reset();
+                });
+            }
+
+            // Background animation
+            const colors = [
+                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
+                'linear-gradient(135deg, #6B73FF 0%, #000DFF 100%)',
+                'linear-gradient(135deg, #FF6B6B 0%, #FF0000 100%)',
+                'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+            ];
+
+            let currentColorIndex = 0;
+            
+            function changeBackground() {
+                currentColorIndex = (currentColorIndex + 1) % colors.length;
+                document.body.style.background = colors[currentColorIndex];
+            }
+
+            // Change background every 10 seconds
+            setInterval(changeBackground, 10000);
+        });
+    </script>
+</body>
+</html>
